@@ -291,6 +291,18 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
+"@istanbul/app@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@istanbul/app/-/app-0.0.4.tgz#7538c684a518b7a000cfa20cf5f5f94e53452acc"
+  integrity sha512-tts2ldvlGJ6aRwYUUGEPa23Kj/wkrAjkVKnc3xfIrpamtIxENFm1F4mdcLPE1NAinXGZqixJTVEqB8Caile02g==
+  dependencies:
+    "@istanbul/events" "^0.0.4"
+
+"@istanbul/events@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@istanbul/events/-/events-0.0.4.tgz#a388999ddec7e340741116e5bf145603176e7013"
+  integrity sha512-B/ebDpFNvb62SnAX3m2ijVWSS3Fulp74jF2SJza0KGyjDUlPjximT2iUjBbSHZeEPWMcZ7NTCjidEctFL9oIKQ==
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"
