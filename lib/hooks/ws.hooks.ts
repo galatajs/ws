@@ -1,18 +1,24 @@
-import { WsApp } from "../app/ws.app";
-import { Server as HttpServer } from "http";
+import {
+  isWebsocketParams,
+  WebsocketConfigParams,
+} from "../types/config.params";
+import { WebsocketConfig, WsApp } from "../app/ws.app";
 import { Server } from "socket.io";
-import { Server as HTTPSServer } from "https";
 import { CorePlugin } from "@istanbul/app";
+import { HttpServerForWs } from "../types/types";
+import { createConfig } from "./config.hooks";
 
-export const createWsApp = (httpServer: HttpServer | HTTPSServer): WsApp => {
+export const createWsApp = (
+  httpServer?:
+    | HttpServerForWs
+    | (WebsocketConfigParams & { server: HttpServerForWs })
+): WsApp => {
+  const config: WebsocketConfig = createConfig(
+    isWebsocketParams(httpServer) ? httpServer : undefined
+  );
+
   return {
-    config: {
-      prefix: "/ws/",
-      serveClient: false,
-      connectTimeout: 45000,
-      adapter: undefined,
-      parser: undefined,
-    },
+    config: config,
     context: undefined,
     build(): CorePlugin {
       return {
@@ -27,6 +33,12 @@ export const createWsApp = (httpServer: HttpServer | HTTPSServer): WsApp => {
             parser: this.config.parser,
             connectTimeout: this.config.connectTimeout,
           });
+          this.context.on("connection", (socket) => {
+            console.log("socket -> ", socket);
+          });
+          if (!httpServer) {
+            this.context.listen(3000);
+          }
         },
       };
     },

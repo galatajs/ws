@@ -303,6 +303,11 @@
   resolved "https://registry.yarnpkg.com/@istanbul/events/-/events-0.0.4.tgz#a388999ddec7e340741116e5bf145603176e7013"
   integrity sha512-B/ebDpFNvb62SnAX3m2ijVWSS3Fulp74jF2SJza0KGyjDUlPjximT2iUjBbSHZeEPWMcZ7NTCjidEctFL9oIKQ==
 
+"@istanbul/events@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@istanbul/events/-/events-0.0.5.tgz#1bf08d8926d1bbc8dafa0221bb2e54cae270bd4d"
+  integrity sha512-2QBgY7twlf6hcltMVSobtCu0OW7UfXiN7rdC0GQXLxOgDW1K8amWcNMsqK8IGRN+/x/SyCrUXtfH0rNa6DkU3Q==
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"

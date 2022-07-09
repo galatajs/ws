@@ -30,10 +30,12 @@
   "scripts": {
     "test": "jest --watchAll --no-cache",
     "clear": "del-cli ./dist/*",
-    "build": "npm run clear && tsc"
+    "build": "npm run clear && tsc",
+    "demo": "ts-node-dev ./demo/demo.ts"
   },
   "dependencies": {
     "@istanbul/app": "^0.0.4",
+    "@istanbul/events": "^0.0.5",
     "socket.io": "^4.5.1"
   },
   "devDependencies": {
