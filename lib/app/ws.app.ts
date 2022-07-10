@@ -1,5 +1,7 @@
 import { CorePluginCreator } from "@istanbul/app";
-import { Server as WsServer } from "socket.io";
+import { Listener } from "../listener/listener";
+import { GlobalMiddleware } from "../middleware/global.middleware";
+import { WsServer } from "../types/types";
 
 export interface WebsocketConfig {
   /**
@@ -41,9 +43,18 @@ export interface WebsocketConfig {
    * @since 0.0.1
    * */
   connectTimeout: number;
+
+  /**
+   * @default 3000
+   * @description Server port
+   * @author Sami Salih İBRAHİMBAŞ
+   * @since 0.0.1
+   * */
+  port: number;
 }
 
 export interface WsApp extends CorePluginCreator {
   config: WebsocketConfig;
   context?: WsServer;
+  use(middleware: GlobalMiddleware): this;
 }

@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "@istanbul/app": "^0.0.4",
+    "@istanbul/core": "^0.0.5",
     "@istanbul/events": "^0.0.5",
     "socket.io": "^4.5.1"
   },

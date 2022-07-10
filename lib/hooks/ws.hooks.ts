@@ -7,6 +7,10 @@ import { Server } from "socket.io";
 import { CorePlugin } from "@istanbul/app";
 import { HttpServerForWs } from "../types/types";
 import { createConfig } from "./config.hooks";
+import { Listener } from "../listener/listener";
+import { GlobalMiddleware } from "../middleware/global.middleware";
+import { UniqueSet } from "@istanbul/core";
+import { createWsService } from "./service.hooks";
 
 export const createWsApp = (
   httpServer?:
@@ -16,10 +20,17 @@ export const createWsApp = (
   const config: WebsocketConfig = createConfig(
     isWebsocketParams(httpServer) ? httpServer : undefined
   );
+  const listeners = new UniqueSet<Listener>();
+  const middlewares = new UniqueSet<GlobalMiddleware>();
+  const service = createWsService(config);
 
   return {
     config: config,
     context: undefined,
+    use(middleware: GlobalMiddleware): WsApp {
+      middlewares.add(middleware);
+      return this;
+    },
     build(): CorePlugin {
       return {
         name: "ws",
@@ -33,12 +44,7 @@ export const createWsApp = (
             parser: this.config.parser,
             connectTimeout: this.config.connectTimeout,
           });
-          this.context.on("connection", (socket) => {
-            console.log("socket -> ", socket);
-          });
-          if (!httpServer) {
-            this.context.listen(3000);
-          }
+          service.mount(this.context, !!!httpServer);
         },
       };
     },

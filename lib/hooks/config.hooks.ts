@@ -7,6 +7,7 @@ const defaultConfig: WebsocketConfig = {
   connectTimeout: 45000,
   adapter: undefined,
   parser: undefined,
+  port: 3000,
 };
 
 export const createConfig = (
