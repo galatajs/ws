@@ -22,7 +22,7 @@ export const createWsApp = (
   );
   const listeners = new UniqueSet<Listener>();
   const middlewares = new UniqueSet<GlobalMiddleware>();
-  const service = createWsService(config);
+  const service = createWsService(config, middlewares);
 
   return {
     config: config,
