@@ -1,45 +1,86 @@
-import { UniqueSet } from "@istanbul/core";
-import { Socket } from "socket.io";
+import { ListenerStorage } from "../listener/listener";
+import { MainNamespace } from "../namespace/namespace";
+import { Namespace as SocketioNamespace } from "socket.io";
 import { WebsocketConfig } from "../app/ws.app";
-import { GlobalMiddleware } from "../middleware/global.middleware";
-import { WsService } from "../service/ws.service";
-import { WsServer } from "../types/types";
+import { MiddlewareStorage } from "../middleware/global.middleware";
+import { WsEventService, WsService } from "../service/ws.service";
+import { WsServer, Socket } from "../types/types";
+import { createListenerStack } from "./stack.hooks";
+import { wsStorage } from "../store/ws.store";
+import { WsStoreKeys } from "../store/ws.store-keys";
 
-export const createWsService = (
-  config: WebsocketConfig,
-  globalMiddlewares: UniqueSet<GlobalMiddleware>
-): WsService => {
+const deployListenersWithStorage = (
+  listenerStorage: ListenerStorage,
+  socket: Socket
+): void => {
+  listenerStorage.listeners.forEach((listener) => {
+    socket.on(listener.buildName(), (...args) => {
+      createListenerStack({
+        args: args,
+        listener: listener,
+        socket: socket,
+      }).next();
+    });
+  });
+};
+
+export const createWsService = (mainNamespace: MainNamespace): WsService => {
   return {
     context: undefined,
     mount(context: WsServer, connectOnMount: boolean): WsService {
       this.context = context;
-      this.mountMiddlewares()
-        .deployNamespaces()
-        .deployListeners()
-        .connect(connectOnMount);
+      this.deployNamespaces();
+      context.on("connection", (socket: Socket) => {
+        this.deployListeners(socket);
+      });
+      this.connect(connectOnMount);
       return this;
     },
-    mountMiddlewares(): WsService {
-      globalMiddlewares.forEach((middleware) => {
+    deployListeners(socket: Socket): WsService {
+      deployListenersWithStorage(mainNamespace, socket);
+      return this;
+    },
+    deployMiddlewares(): WsService {
+      mainNamespace.middlewares.forEach((middleware) => {
         this.context!.use(middleware);
       });
       return this;
     },
-    deployListeners(): WsService {
-      this.context!.on("connection", (socket: Socket) => {});
+    deployNamespaces(): WsService {
+      mainNamespace.namespaces.forEach((namespace) => {
+        const ns = this.context!.of(namespace.path);
+        createEventService(ns, namespace).deploy();
+      });
       return this;
     },
     connect(connectOnMount: boolean): WsService {
+      const config = wsStorage.inject(WsStoreKeys.Config) as WebsocketConfig;
       if (connectOnMount) this.context!.listen(config.port);
       return this;
     },
-    disconnect(): WsService {
+  };
+};
+
+export const createEventService = (
+  context: WsServer | SocketioNamespace,
+  storage: ListenerStorage & MiddlewareStorage
+): WsEventService => {
+  return {
+    deploy(): WsEventService {
+      this.deployMiddlewares();
+      context.on("connection", (socket: Socket) => {
+        this.deployListeners(socket);
+      });
       return this;
     },
-    deployMiddlewares(): WsService {
+    deployMiddlewares() {
+      storage.middlewares.forEach((middleware) => {
+        context.use(middleware);
+      });
       return this;
     },
-    deployNamespaces(): WsService {
+    deployListeners(socket: Socket) {
+      deployListenersWithStorage(storage, socket);
       return this;
     },
   };

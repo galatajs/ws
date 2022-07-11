@@ -1,6 +1,10 @@
 import { CorePluginCreator } from "@istanbul/app";
-import { Listener } from "../listener/listener";
-import { GlobalMiddleware } from "../middleware/global.middleware";
+import { ListenerCreator } from "../listener/listener";
+import {
+  GlobalMiddleware,
+  MiddlewareImplementer,
+} from "../middleware/global.middleware";
+import { MainNamespace } from "../namespace/namespace";
 import { WsServer } from "../types/types";
 
 export interface WebsocketConfig {
@@ -51,10 +55,21 @@ export interface WebsocketConfig {
    * @since 0.0.1
    * */
   port: number;
+
+  /**
+   * @default @
+   * @description listener version separator
+   * @author Sami Salih İBRAHİMBAŞ
+   * @since 0.0.1
+   * */
+  versionSeparator: string;
 }
 
-export interface WsApp extends CorePluginCreator {
+export interface WsApp
+  extends CorePluginCreator,
+    MiddlewareImplementer,
+    ListenerCreator {
   config: WebsocketConfig;
+  mainNamespace: MainNamespace;
   context?: WsServer;
-  use(middleware: GlobalMiddleware): this;
 }

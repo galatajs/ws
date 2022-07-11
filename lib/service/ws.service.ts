@@ -1,12 +1,16 @@
-import { WsServer } from "../types/types";
+import { Socket, WsServer } from "../types/types";
 
 export interface WsService {
   context?: WsServer;
   mount(context: WsServer, connectOnMount: boolean): this;
   connect(connectOnMount: boolean): this;
-  disconnect(): this;
-  deployListeners(): this;
+  deployListeners(socket: Socket): this;
   deployMiddlewares(): this;
   deployNamespaces(): this;
-  mountMiddlewares(): this;
+}
+
+export interface WsEventService {
+  deployListeners(socket: Socket): this;
+  deployMiddlewares(): this;
+  deploy(): this;
 }

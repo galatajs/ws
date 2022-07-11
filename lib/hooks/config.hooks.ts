@@ -1,4 +1,6 @@
 import { WebsocketConfig } from "../app/ws.app";
+import { wsStorage } from "../store/ws.store";
+import { WsStoreKeys } from "../store/ws.store-keys";
 import { WebsocketConfigParams } from "../types/config.params";
 
 const defaultConfig: WebsocketConfig = {
@@ -8,13 +10,16 @@ const defaultConfig: WebsocketConfig = {
   adapter: undefined,
   parser: undefined,
   port: 3000,
+  versionSeparator: "@",
 };
 
 export const createConfig = (
   config?: WebsocketConfigParams
 ): WebsocketConfig => {
-  return {
+  const _config = {
     ...defaultConfig,
     ...config,
   };
+  wsStorage.provide(WsStoreKeys.Config, _config);
+  return _config;
 };
