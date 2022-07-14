@@ -1,13 +1,13 @@
 import { ListenerStorage } from "../listener/listener";
 import { MainNamespace } from "../namespace/namespace";
 import { Namespace as SocketioNamespace } from "socket.io";
-import { WebsocketConfig } from "../app/ws.app";
 import { MiddlewareStorage } from "../middleware/global.middleware";
 import { WsEventService, WsService } from "../service/ws.service";
 import { WsServer, Socket } from "../types/types";
 import { createListenerStack } from "./stack.hooks";
-import { wsStorage } from "../store/ws.store";
+import { wsStorage } from "../store/ws.store.private";
 import { WsStoreKeys } from "../store/ws.store-keys";
+import { WebsocketConfig } from "../config/config";
 
 const deployListenersWithStorage = (
   listenerStorage: ListenerStorage,

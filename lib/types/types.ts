@@ -12,3 +12,13 @@ export type Request = {
 };
 export type HttpServerForWs = HttpServer | HTTPSServer;
 export type WsServer = SocketIoServer;
+
+export enum HttpMethods {
+  GET = "GET",
+  POST = "POST",
+  PUT = "PUT",
+  DELETE = "DELETE",
+  PATCH = "PATCH",
+  HEAD = "HEAD",
+  OPTIONS = "OPTIONS",
+}

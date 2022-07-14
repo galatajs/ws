@@ -6,9 +6,9 @@ import {
   Listener,
   ListenerCreator,
 } from "../listener/listener";
-import { WebsocketConfig } from "../app/ws.app";
-import { wsStorage } from "../store/ws.store";
+import { wsStorage } from "../store/ws.store.private";
 import { WsStoreKeys } from "../store/ws.store-keys";
+import { WebsocketConfig } from "../config/config";
 
 export const createListener = (props: CreateListenerProps): Listener => {
   const [name, version] = props.name.split(props.versionSeparator);

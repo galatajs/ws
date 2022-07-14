@@ -4,6 +4,8 @@ export type WebsocketConfigParams = {
   connectTimeout?: number;
   adapter?: any;
   parser?: any;
+  cors?: any;
+  [key: string]: any;
 };
 
 export function isWebsocketParams(obj: any): obj is WebsocketConfigParams {
