@@ -9,7 +9,7 @@ const defaultConfig: WebsocketConfig = {
   serveClient: false,
   connectTimeout: 45000,
   port: 3000,
-  versionSeparator: "@",
+  versionSeparator: ".",
   cors: {
     origin: "*",
     methods: [

@@ -34,7 +34,7 @@ export interface WebsocketConfig {
   port: number;
 
   /**
-   * @default @
+   * @default .
    * @description listener version separator
    * @author Sami Salih İBRAHİMBAŞ
    * @since 0.0.1

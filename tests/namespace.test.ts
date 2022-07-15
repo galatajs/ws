@@ -12,12 +12,12 @@ describe("Namespace testing", () => {
     const httpServer = createServer();
     ws = createWsApp(httpServer);
     app.register(ws);
-    ns = createNamespace("admin");
+    ns = createNamespace("admin", 1); // versioned namespace
     app.start();
     httpServer.listen(() => {
       const port = (httpServer.address() as AddressInfo).port;
       clientSocket = Client(`http://localhost:${port}`, { path: "/ws/" });
-      nsClientSocket = Client(`http://localhost:${port}/admin`, {
+      nsClientSocket = Client(`http://localhost:${port}/admin.1`, {
         path: "/ws/",
       });
 
