@@ -32,6 +32,5 @@ export const createConfig = (
     ...config,
   };
   wsStorage.provide(WsStoreKeys.Config, _config);
-  wsStorage.provide(WsStoreKeys.ErrorHandler, _config.errorHandler);
   return _config;
 };

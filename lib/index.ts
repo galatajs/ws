@@ -15,3 +15,5 @@ export * from "./response/response";
 export * from "./store/ws.store.public";
 export { WebsocketConfigParams } from "./types/config.params";
 export * from "./types/types";
+export { Request as HttpRequest } from "./request/request";
+export { Response } from "./response/response";

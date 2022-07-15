@@ -1,4 +1,7 @@
-import { NamespaceImplementer } from "./../namespace/namespace";
+import {
+  NamespaceCreator,
+  NamespaceImplementer,
+} from "./../namespace/namespace";
 import { UniqueSet } from "@istanbul/core";
 import { WebsocketConfig } from "../config/config";
 import { Listener } from "../listener/listener";
@@ -22,7 +25,7 @@ const parseProps = (props: NamespaceProps | string): NamespaceProps => {
   return props;
 };
 
-export const createNamespace = (
+export const createNamespace: NamespaceCreator = (
   props: NamespaceProps | string,
   version?: number
 ): Namespace => {
@@ -39,9 +42,9 @@ export const createNamespace = (
       }`;
     },
     listeners: listeners,
-    ...createMiddlewareImplementer(middlewares),
     middlewares: middlewares,
     ...createListenerCreator(listeners),
+    ...createMiddlewareImplementer(middlewares),
   };
 };
 

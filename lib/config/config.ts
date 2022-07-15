@@ -43,5 +43,11 @@ export interface WebsocketConfig {
 
   cors: any;
 
+  /**
+   * @default undefined
+   * @description listen all errors
+   * @author Sami Salih İBRAHİMBAŞ
+   * @since 0.0.1
+   * */
   errorHandler?: ErrorEventHandler;
 }

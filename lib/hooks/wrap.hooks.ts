@@ -1,10 +1,10 @@
 import { transformHttpRequest } from "../request/request.transformer";
-import { Socket } from "socket.io";
 import { GlobalMiddleware } from "../middleware/global.middleware";
 import {
   HttpMiddleware,
   HttpMiddlewareWrapper,
   NextFunction,
+  Socket,
 } from "../types/types";
 
 export const wrapHttpMiddleware: HttpMiddlewareWrapper = (

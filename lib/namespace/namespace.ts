@@ -32,3 +32,8 @@ export interface MainNamespace
 export type NamespaceImplementer = {
   register(namespace: Namespace): void;
 };
+
+export type NamespaceCreator = {
+  (props: NamespaceProps): Namespace;
+  (path: string, version?: number): Namespace;
+};
