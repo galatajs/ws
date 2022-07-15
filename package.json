@@ -34,7 +34,7 @@
     "demo": "ts-node-dev ./demo/demo.ts"
   },
   "dependencies": {
-    "@istanbul/app": "^0.0.4",
+    "@istanbul/app": "^0.0.8",
     "@istanbul/core": "^0.0.6",
     "@istanbul/events": "^0.0.5",
     "@istanbul/inject": "^0.0.2",

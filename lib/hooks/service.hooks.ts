@@ -27,7 +27,11 @@ const deployListenersWithStorage = (
 export const createWsService = (mainNamespace: MainNamespace): WsService => {
   return {
     context: undefined,
-    mount(context: WsServer, connectOnMount: boolean): WsService {
+    mount(
+      context: WsServer,
+      mainNamespace: MainNamespace,
+      connectOnMount: boolean
+    ): WsService {
       this.context = context;
       this.deployNamespaces();
       context.on("connection", (socket: Socket) => {
@@ -48,7 +52,7 @@ export const createWsService = (mainNamespace: MainNamespace): WsService => {
     },
     deployNamespaces(): WsService {
       mainNamespace.namespaces.forEach((namespace) => {
-        const ns = this.context!.of(namespace.path);
+        const ns = this.context!.of(namespace.buildName());
         createEventService(ns, namespace).deploy();
       });
       return this;

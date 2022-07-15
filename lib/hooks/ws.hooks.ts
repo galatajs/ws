@@ -10,7 +10,10 @@ import { createConfig } from "./config.hooks";
 import { createWsService } from "./service.hooks";
 import { createMiddlewareImplementer } from "./middleware.hooks";
 import { createListenerCreator } from "./listener.hooks";
-import { createMainNamespace } from "./namespace.hooks";
+import {
+  createMainNamespace,
+  createNamespaceImplementer,
+} from "./namespace.hooks";
 import { WebsocketConfig } from "../config/config";
 import { wsStore, WsStoreKeys } from "../store/ws.store.public";
 
@@ -23,19 +26,18 @@ export const createWsApp = (
     isWebsocketParams(httpServer) ? httpServer : undefined
   );
   const mainNamespace = createMainNamespace();
-  const service = createWsService(mainNamespace);
-
   return {
     config: config,
     context: undefined,
     mainNamespace: mainNamespace,
-    ...createMiddlewareImplementer(),
+    ...createMiddlewareImplementer(mainNamespace.middlewares),
     ...createListenerCreator(mainNamespace.listeners),
+    ...createNamespaceImplementer(mainNamespace.namespaces),
     build(): CorePlugin {
       return {
         name: "ws",
         version: "1.0.0",
-        onAppStarted(hook) {},
+        onAppStarted: (hook) => {},
         install: () => {
           this.context = new Server(httpServer, {
             path: this.config.prefix,
@@ -43,8 +45,9 @@ export const createWsApp = (
             connectTimeout: this.config.connectTimeout,
             cors: this.config.cors,
           });
+          const service = createWsService(this.mainNamespace);
           wsStore.provide(WsStoreKeys.context, this.context);
-          service.mount(this.context, !!!httpServer);
+          service.mount(this.context, this.mainNamespace, !!!httpServer);
         },
       };
     },

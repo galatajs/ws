@@ -17,6 +17,7 @@ export interface Namespace
     MiddlewareStorage {
   path: string;
   version?: number;
+  buildName(): string;
 }
 
 export interface NamespaceStorage {
@@ -27,3 +28,7 @@ export interface MainNamespace
   extends ListenerStorage,
     MiddlewareStorage,
     NamespaceStorage {}
+
+export type NamespaceImplementer = {
+  register(namespace: Namespace): void;
+};
