@@ -1,3 +1,4 @@
+import { transformHttpRequest } from "./../request/request.transformer";
 import { InternalMiddleware } from "../middleware/internal.middleware";
 import { ListenerStack, CreateListenerStackProps } from "../stack/stack";
 import { WsStoreKeys } from "../store/ws.store-keys";
@@ -19,7 +20,8 @@ export const createListenerStack = (
       : !!props.args
       ? props.args
       : {};
-  const req = { body };
+  const req = transformHttpRequest(props.socket.request);
+  req.body = { body };
   const stack = new Set<InternalMiddleware>(props.listener.middlewares);
   const done = (result?: any) => {
     res.reply(result);

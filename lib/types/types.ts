@@ -7,17 +7,22 @@ import { Server as SocketIoServer } from "socket.io";
 import { GlobalMiddleware } from "../middleware/global.middleware";
 
 export type Socket = SocketioSocket;
-export type EventHandler = (socket: Socket, req: Request, res: Response) => any;
+export type EventHandler = (
+  socket: Socket,
+  req: SocketRequest,
+  res: Response
+) => any;
 export type NextFunction = (err?: any) => any;
 export type ErrorEventHandler = (
   err: any,
   socket: Socket,
-  req: Request,
+  req: SocketRequest,
   res: Response
 ) => any;
 export type Request = {
   body: any;
 };
+export type SocketRequest = Request & ParsedRequest;
 export type HttpServerForWs = HttpServer | HTTPSServer;
 export type WsServer = SocketIoServer;
 

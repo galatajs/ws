@@ -52,4 +52,13 @@ describe("Listener testing", () => {
     });
     clientSocket.emit("test");
   });
+
+  test("listen a event and check request ip address", () => {
+    ws.listen("test", (socket, req, res) => {
+      res.reply(req.ip);
+    });
+    clientSocket.emit("test", (msg) => {
+      expect(msg).toBe("::1");
+    });
+  });
 });
