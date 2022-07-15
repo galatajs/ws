@@ -12,6 +12,7 @@ import { createMiddlewareImplementer } from "./middleware.hooks";
 import { createListenerCreator } from "./listener.hooks";
 import {
   createMainNamespace,
+  createNamespace,
   createNamespaceImplementer,
 } from "./namespace.hooks";
 import { WebsocketConfig } from "../config/config";
@@ -31,13 +32,14 @@ export const createWsApp: WsAppCreator = (
     isWebsocketParams(httpServer) ? httpServer : undefined
   );
   const mainNamespace = createMainNamespace();
+  privateWsStorage.provide(PrivateWsStoreKeys.MainNamespace, mainNamespace);
   return {
     config: config,
     context: undefined,
     mainNamespace: mainNamespace,
     ...createMiddlewareImplementer(mainNamespace.middlewares),
     ...createListenerCreator(mainNamespace.listeners),
-    ...createNamespaceImplementer(mainNamespace.namespaces),
+    of: createNamespace,
     build(): CorePlugin {
       return {
         name: "ws",

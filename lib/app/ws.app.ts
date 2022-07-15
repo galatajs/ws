@@ -1,5 +1,5 @@
 import { HttpServerForWs } from "./../types/types";
-import { NamespaceImplementer } from "../namespace/namespace";
+import { NamespaceCreator, NamespaceImplementer } from "../namespace/namespace";
 import { CorePluginCreator } from "@istanbul/app";
 import { WebsocketConfig } from "../config/config";
 import { ListenerCreator } from "../listener/listener";
@@ -11,11 +11,11 @@ import { WebsocketConfigParams } from "../types/config.params";
 export interface WsApp
   extends CorePluginCreator,
     MiddlewareImplementer,
-    ListenerCreator,
-    NamespaceImplementer {
+    ListenerCreator {
   config: WebsocketConfig;
   mainNamespace: MainNamespace;
   context?: WsServer;
+  of: NamespaceCreator;
 }
 
 export type WsAppCreator = {

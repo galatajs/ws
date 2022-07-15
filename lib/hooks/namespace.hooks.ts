@@ -1,7 +1,4 @@
-import {
-  NamespaceCreator,
-  NamespaceImplementer,
-} from "./../namespace/namespace";
+import { NamespaceCreator, NamespaceImplementer } from "../namespace/namespace";
 import { UniqueSet } from "@istanbul/core";
 import { WebsocketConfig } from "../config/config";
 import { Listener } from "../listener/listener";
@@ -32,7 +29,7 @@ export const createNamespace: NamespaceCreator = (
   const listeners = new UniqueSet<Listener>();
   const middlewares = new UniqueSet<GlobalMiddleware>();
   const _props = parseProps(props);
-  return {
+  const namespace = {
     path: _props.path,
     version: _props.version || version,
     buildName() {
@@ -46,6 +43,11 @@ export const createNamespace: NamespaceCreator = (
     ...createListenerCreator(listeners),
     ...createMiddlewareImplementer(middlewares),
   };
+  const mainNamespace = wsStorage.inject(
+    WsStoreKeys.MainNamespace
+  ) as MainNamespace;
+  mainNamespace.namespaces.add(namespace);
+  return namespace;
 };
 
 export const createMainNamespace = (): MainNamespace => {
