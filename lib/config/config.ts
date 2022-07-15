@@ -1,3 +1,5 @@
+import { ErrorEventHandler } from "../types/types";
+
 export interface WebsocketConfig {
   /**
    * @default "/ws/"
@@ -40,4 +42,6 @@ export interface WebsocketConfig {
   versionSeparator: string;
 
   cors: any;
+
+  errorHandler?: ErrorEventHandler;
 }

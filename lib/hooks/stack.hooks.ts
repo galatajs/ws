@@ -1,5 +1,8 @@
 import { InternalMiddleware } from "../middleware/internal.middleware";
 import { ListenerStack, CreateListenerStackProps } from "../stack/stack";
+import { WsStoreKeys } from "../store/ws.store-keys";
+import { wsStorage } from "../store/ws.store.private";
+import { ErrorEventHandler } from "../types/types";
 import { createResponseInstance } from "./response.hooks";
 
 export const createListenerStack = (
@@ -30,8 +33,11 @@ export const createListenerStack = (
       stack.delete(middleware);
       middleware(props.socket, req, res, next);
     } catch (e) {
-      next(e);
-      return;
+      const errorHandler = wsStorage.inject(
+        WsStoreKeys.ErrorHandler
+      ) as ErrorEventHandler;
+      if (errorHandler) return errorHandler(e, props.socket, req, res);
+      return next(e);
     }
   };
   return {

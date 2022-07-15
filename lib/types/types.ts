@@ -9,6 +9,12 @@ import { GlobalMiddleware } from "../middleware/global.middleware";
 export type Socket = SocketioSocket;
 export type EventHandler = (socket: Socket, req: Request, res: Response) => any;
 export type NextFunction = (err?: any) => any;
+export type ErrorEventHandler = (
+  err: any,
+  socket: Socket,
+  req: Request,
+  res: Response
+) => any;
 export type Request = {
   body: any;
 };
