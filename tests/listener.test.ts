@@ -61,4 +61,28 @@ describe("Listener testing", () => {
       expect(msg).toBe("::1");
     });
   });
+
+  test("all event listener testing", () => {
+    ws.listen("*", (socket, req, res) => {
+      res.reply("all listener");
+    });
+    ws.listen("hello", (socket, req, res) => {
+      res.reply("hello listener");
+    });
+    clientSocket.emit("hello", (msg) => {
+      expect(msg).toBe("all listener");
+    });
+  });
+
+  test("prepend event listener testing", () => {
+    ws.listen("<*", (socket, req, res) => {
+      res.reply("prepend listener");
+    });
+    ws.listen("hello", (socket, req, res) => {
+      res.reply("hello listener");
+    });
+    clientSocket.emit("hello", (msg) => {
+      expect(msg).toBe("prepend listener");
+    });
+  });
 });
