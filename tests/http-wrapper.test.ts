@@ -12,9 +12,7 @@ describe("Http Wrapper testing", () => {
     const httpServer = createServer();
     ws = createWsApp(httpServer);
     app.register(ws);
-    console.log("benden sonra");
     app.start();
-    console.log("benden önce");
     httpServer.listen(() => {
       const port = (httpServer.address() as AddressInfo).port;
       clientSocket = Client(`http://localhost:${port}`, { path: "/ws/" });
