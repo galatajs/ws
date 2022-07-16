@@ -16,4 +16,5 @@ export * from "./store/ws.store.public";
 export { WebsocketConfigParams } from "./types/config.params";
 export * from "./types/types";
 export { Request as HttpRequest } from "./request/request";
+export { transformHttpRequest } from "./request/request.transformer";
 export { Response } from "./response/response";
