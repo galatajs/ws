@@ -1,6 +1,6 @@
-import { HttpServerForWs } from "./../types/types";
-import { NamespaceCreator, NamespaceImplementer } from "../namespace/namespace";
 import { CorePluginCreator } from "@istanbul/app";
+import { HttpServerForWs } from "../types/types";
+import { NamespaceCreator } from "../namespace/namespace";
 import { WebsocketConfig } from "../config/config";
 import { ListenerCreator } from "../listener/listener";
 import { MiddlewareImplementer } from "../middleware/global.middleware";

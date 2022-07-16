@@ -1,3 +1,4 @@
+import { AdapterConstructor } from "../adapter/adapter";
 import { ErrorEventHandler } from "../types/types";
 
 export interface WebsocketConfig {
@@ -50,4 +51,12 @@ export interface WebsocketConfig {
    * @since 0.0.1
    * */
   errorHandler?: ErrorEventHandler;
+
+  /**
+   * @default undefined
+   * @description register a socket.io adapter. More: https://socket.io/docs/v4/adapter/
+   * @author Sami Salih İBRAHİMBAŞ
+   * @since 0.0.1
+   * */
+  adapter?: AdapterConstructor;
 }

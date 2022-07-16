@@ -22,6 +22,8 @@ import {
   WsStoreKeys as PublicWsStoreKeys,
 } from "../store/ws.store.public";
 import { wsStorage as privateWsStorage } from "../store/ws.store.private";
+import { Adapter } from "socket.io-adapter";
+import { AdapterConstructor } from "../adapter/adapter";
 
 export const createWsApp: WsAppCreator = (
   httpServer?:
@@ -56,6 +58,9 @@ export const createWsApp: WsAppCreator = (
             connectTimeout: this.config.connectTimeout,
             cors: this.config.cors,
           });
+          if (this.config.adapter) {
+            this.context.adapter(this.config.adapter);
+          }
           publicWsStore.provide(PublicWsStoreKeys.context, this.context);
           createWsService(this.mainNamespace).mount(
             this.context,
