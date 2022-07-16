@@ -10,11 +10,7 @@ import { createConfig } from "./config.hooks";
 import { createWsService } from "./service.hooks";
 import { createMiddlewareImplementer } from "./middleware.hooks";
 import { createListenerCreator } from "./listener.hooks";
-import {
-  createMainNamespace,
-  createNamespace,
-  createNamespaceImplementer,
-} from "./namespace.hooks";
+import { createMainNamespace, createNamespace } from "./namespace.hooks";
 import { WebsocketConfig } from "../config/config";
 import { WsStoreKeys as PrivateWsStoreKeys } from "../store/ws.store-keys";
 import {
@@ -22,8 +18,6 @@ import {
   WsStoreKeys as PublicWsStoreKeys,
 } from "../store/ws.store.public";
 import { wsStorage as privateWsStorage } from "../store/ws.store.private";
-import { Adapter } from "socket.io-adapter";
-import { AdapterConstructor } from "../adapter/adapter";
 
 export const createWsApp: WsAppCreator = (
   httpServer?:

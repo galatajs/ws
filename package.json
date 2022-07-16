@@ -1,6 +1,6 @@
 {
   "name": "@istanbul/ws",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Websocket packages of istanbul framework",
   "homepage": "https://github.com/istanbulnode/ws#readme",
   "keywords": [

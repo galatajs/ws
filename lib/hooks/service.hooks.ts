@@ -37,13 +37,16 @@ const deployListenersWithStorage = (
 export const createWsService = (mainNamespace: MainNamespace): WsService => {
   return {
     context: undefined,
+    mainNamespace: undefined,
     mount(
       context: WsServer,
       mainNamespace: MainNamespace,
       connectOnMount: boolean
     ): WsService {
       this.context = context;
+      this.mainNamespace = mainNamespace;
       this.deployNamespaces();
+      this.deployMiddlewares();
       context.on("connection", (socket: Socket) => {
         this.deployListeners(socket);
       });
@@ -55,7 +58,7 @@ export const createWsService = (mainNamespace: MainNamespace): WsService => {
       return this;
     },
     deployMiddlewares(): WsService {
-      mainNamespace.middlewares.forEach((middleware) => {
+      this.mainNamespace!.middlewares.forEach((middleware) => {
         this.context!.use(middleware);
       });
       return this;
