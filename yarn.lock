@@ -284,10 +284,10 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@istanbul/app@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@istanbul/app/-/app-0.0.8.tgz#521757ad5c267316105adf28f59ddfe35c84530a"
-  integrity sha512-BTJ8ElboQCCY48t9tHv6CeZxRxrAO5hLhMdtoGTJ9SdW5qGVe+uEvWZj5H3v2G7zrfk7lIKkaJOrNRugwVH1yQ==
+"@istanbul/app@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@istanbul/app/-/app-0.0.10.tgz#cadac57f0bbb2a11645fd91b10d4f873c7d30fb7"
+  integrity sha512-G59nUQIIgIE6BBwsUkwcc5JN9E0XzgEPGKuLWvSHENjzaG043E1PPGPMKeuJcPvn3CNktQ4Iuv5fMDpGyyPsZg==
   dependencies:
     "@istanbul/events" "^0.0.4"
 

@@ -46,7 +46,6 @@ export const createWsApp: WsAppCreator = (
       return {
         name: "ws",
         version: "1.0.0",
-        onAppStarted: (hook) => {},
         install: () => {
           privateWsStorage.provide(
             PrivateWsStoreKeys.ErrorHandler,
