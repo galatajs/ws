@@ -14,13 +14,23 @@ const deployListenersWithStorage = (
   socket: Socket
 ): void => {
   listenerStorage.listeners.forEach((listener) => {
-    socket.on(listener.buildName(), (...args) => {
+    let method: string = "on";
+    const params: Array<any> = [];
+    const handler = (...args) => {
       createListenerStack({
         args: args,
         listener: listener,
         socket: socket,
       }).next();
-    });
+    };
+    if (listener.buildName() === "*") {
+      method = "onAny";
+    } else if (listener.buildName() === "<*") {
+      method = "prependAny";
+    } else {
+      params.push(listener.buildName());
+    }
+    socket[method](...params, handler);
   });
 };
 
