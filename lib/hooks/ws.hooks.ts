@@ -1,10 +1,11 @@
+import { IncomingMessage, ServerResponse } from "http";
 import {
   isWebsocketParams,
   WebsocketConfigParams,
 } from "../types/config.params";
 import { WsApp, WsAppCreator } from "../app/ws.app";
 import { Server } from "socket.io";
-import { CorePlugin } from "@istanbul/app";
+import { App, CorePlugin } from "@istanbul/app";
 import { HttpServerForWs } from "../types/types";
 import { createConfig } from "./config.hooks";
 import { createWsService } from "./service.hooks";
@@ -40,7 +41,7 @@ export const createWsApp: WsAppCreator = (
       return {
         name: "ws",
         version: "1.0.0",
-        install: () => {
+        install: (app: App) => {
           privateWsStorage.provide(
             PrivateWsStoreKeys.ErrorHandler,
             this.config.errorHandler
@@ -53,6 +54,20 @@ export const createWsApp: WsAppCreator = (
           });
           if (this.config.adapter) {
             this.context.adapter(this.config.adapter);
+          }
+          const corsMiddleware = app.store.inject(
+            "istanbuljs:cors-middleware",
+            true
+          );
+          if (corsMiddleware) {
+            this.context.engine.corsMiddleware = (
+              options: any,
+              req: IncomingMessage,
+              res: ServerResponse,
+              next: Function
+            ) => {
+              return corsMiddleware(req, res, next);
+            };
           }
           publicWsStore.provide(PublicWsStoreKeys.context, this.context);
           createWsService(this.mainNamespace).mount(
