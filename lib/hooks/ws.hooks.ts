@@ -46,19 +46,19 @@ export const createWsApp: WsAppCreator = (
             PrivateWsStoreKeys.ErrorHandler,
             this.config.errorHandler
           );
-          this.context = new Server(httpServer, {
-            path: this.config.prefix,
-            serveClient: this.config.serveClient,
-            connectTimeout: this.config.connectTimeout,
-            cors: this.config.cors,
-          });
-          if (this.config.adapter) {
-            this.context.adapter(this.config.adapter);
-          }
           const corsMiddleware = app.store.inject(
             "istanbuljs:cors-middleware",
             true
           );
+          this.context = new Server(httpServer, {
+            path: this.config.prefix,
+            serveClient: this.config.serveClient,
+            connectTimeout: this.config.connectTimeout,
+            cors: !!corsMiddleware ? null : this.config.cors,
+          });
+          if (this.config.adapter) {
+            this.context.adapter(this.config.adapter);
+          }
           if (corsMiddleware) {
             this.context.engine.corsMiddleware = (
               options: any,
