@@ -47,7 +47,7 @@ export const createWsApp: WsAppCreator = (
             this.config.errorHandler
           );
           const corsMiddleware = app.store.inject(
-            "istanbuljs:cors-middleware",
+            "istanbuljs:cors-ws-middleware",
             true
           );
           this.context = new Server(httpServer, {
