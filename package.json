@@ -1,6 +1,6 @@
 {
   "name": "@istanbul/ws",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Websocket packages of istanbul framework",
   "homepage": "https://github.com/istanbulnode/ws#readme",
   "keywords": [
@@ -21,7 +21,7 @@
   },
   "directories": {
     "lib": "lib",
-    "test": "tests"
+    "test": "test"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -29,9 +29,10 @@
     "dist/**/*"
   ],
   "scripts": {
-    "test": "jest --watchAll --no-cache",
+    "test": "node --no-warnings --test",
     "clear": "del-cli ./dist/*",
-    "build": "npm run clear && tsc"
+    "build": "npm run clear && tsc",
+    "production": "npm run build && npm run test"
   },
   "dependencies": {
     "@istanbul/app": "^0.0.14",
@@ -41,20 +42,9 @@
     "socket.io": "^4.5.1"
   },
   "devDependencies": {
-    "@types/jest": "^28.1.3",
     "@types/node": "^18.0.0",
-    "jest": "^28.1.1",
     "socket.io-adapter": "^2.4.0",
     "socket.io-client": "^4.5.1",
-    "ts-jest": "^28.0.5",
     "typescript": "^4.7.4"
-  },
-  "jest": {
-    "preset": "ts-jest",
-    "testEnvironment": "node",
-    "moduleNameMapper": {
-      "@/(.*)": "<rootDir>/$1",
-      "~/(.*)": "<rootDir>/$1"
-    }
   }
 }
