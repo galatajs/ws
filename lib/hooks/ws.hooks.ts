@@ -1,11 +1,16 @@
-import { IncomingMessage, ServerResponse } from "http";
+import {
+  IncomingMessage,
+  ServerResponse,
+  Server as HttpServer,
+} from "node:http";
+import { Http2Server } from "node:http2";
+import { App, CorePlugin, warn } from "@istanbul/app";
+import { Server } from "socket.io";
 import {
   isWebsocketParams,
   WebsocketConfigParams,
 } from "../types/config.params";
 import { WsApp, WsAppCreator } from "../app/ws.app";
-import { Server } from "socket.io";
-import { App, CorePlugin } from "@istanbul/app";
 import { HttpServerForWs } from "../types/types";
 import { createConfig } from "./config.hooks";
 import { createWsService } from "./service.hooks";
@@ -19,6 +24,12 @@ import {
   WsStoreKeys as PublicWsStoreKeys,
 } from "../store/ws.store.public";
 import { wsStorage as privateWsStorage } from "../store/ws.store.private";
+import {
+  onSocketConnectedEvent,
+  onSocketDisconnectedEvent,
+  SocketConnectedListener,
+  SocketDisconnectedListener,
+} from "../events/ws.events";
 
 export const createWsApp: WsAppCreator = (
   httpServer?:
@@ -30,6 +41,11 @@ export const createWsApp: WsAppCreator = (
   );
   const mainNamespace = createMainNamespace();
   privateWsStorage.provide(PrivateWsStoreKeys.MainNamespace, mainNamespace);
+
+  const showServerNotStartedWarn = () => {
+    warn(`Websocket - Server is not started`);
+  };
+  let waitIstanbulHttp: boolean = false;
   return {
     config: config,
     context: undefined,
@@ -37,6 +53,19 @@ export const createWsApp: WsAppCreator = (
     ...createMiddlewareImplementer(mainNamespace.middlewares),
     ...createListenerCreator(mainNamespace.listeners),
     of: createNamespace,
+    close() {
+      if (this.context) this.context.close();
+      else showServerNotStartedWarn();
+      return this;
+    },
+    onSocketConnect(listener: SocketConnectedListener): WsApp {
+      onSocketConnectedEvent.addListener(listener);
+      return this;
+    },
+    onSocketDisconnect(listener: SocketDisconnectedListener): WsApp {
+      onSocketDisconnectedEvent.addListener(listener);
+      return this;
+    },
     build(): CorePlugin {
       return {
         name: "ws",

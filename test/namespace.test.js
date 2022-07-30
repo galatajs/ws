@@ -52,8 +52,17 @@ test("Namespace Testing", async (t) => {
     });
   });
 
+  await t.test("use namespace connection hook", () => {
+    nsClientSocket.on("connection_handled", (msg) => {
+      assert.strictEqual(msg, "hello");
+    });
+    ns.context.on("connection", (socket) => {
+      socket.emit("connection_handled", "hello");
+    });
+  });
+
   await t.test("afterAll", async () => {
-    ws.context.close();
+    ws.close();
     clientSocket.close();
     nsClientSocket.close();
   });

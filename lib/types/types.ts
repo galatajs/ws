@@ -1,9 +1,12 @@
-import { Socket as SocketioSocket } from "socket.io";
+import { Server as HttpServer } from "node:http";
+import { Server as HTTPSServer } from "node:https";
+import {
+  Socket as SocketioSocket,
+  Server as SocketIoServer,
+  Namespace as SocketioNamespace,
+} from "socket.io";
 import { Response } from "../response/response";
 import { Request as ParsedRequest } from "../request/request";
-import { Server as HttpServer } from "http";
-import { Server as HTTPSServer } from "https";
-import { Server as SocketIoServer } from "socket.io";
 import { GlobalMiddleware } from "../middleware/global.middleware";
 
 export type Socket = SocketioSocket;
@@ -25,6 +28,7 @@ export type Request = {
 export type SocketRequest = Request & ParsedRequest;
 export type HttpServerForWs = HttpServer | HTTPSServer;
 export type WsServer = SocketIoServer;
+export type WsNamespace = SocketioNamespace;
 
 export enum HttpMethods {
   GET = "GET",
