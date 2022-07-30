@@ -15,8 +15,8 @@ export const transformHttpRequest = (
     params: {},
     body: {},
     query: query,
-    cookies: {},
-    headers: {
+    cookie: {},
+    header: {
       get(key: string): HeaderGetterResult {
         return getHead(req, key);
       },

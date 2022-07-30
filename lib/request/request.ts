@@ -7,9 +7,9 @@ export interface BaseRequest {
   ip: string;
   body: Record<string, any>;
   params: Record<string, any>;
-  cookies: any;
+  cookie: any;
   query: Record<string, any>;
-  headers: HeaderGetter;
+  header: HeaderGetter;
 }
 type Http1BaseRequest = Modify<IncomingMessage, BaseRequest>;
 type Http2BaseRequest = Modify<Http2ServerRequest, BaseRequest>;
