@@ -1,9 +1,12 @@
+import {
+  onSocketConnectedEvent,
+  onSocketDisconnectedEvent,
+} from "../events/ws.events";
 import { ListenerStorage } from "../listener/listener";
 import { MainNamespace } from "../namespace/namespace";
-import { Namespace as SocketioNamespace } from "socket.io";
 import { MiddlewareStorage } from "../middleware/global.middleware";
 import { WsEventService, WsService } from "../service/ws.service";
-import { WsServer, Socket } from "../types/types";
+import { WsServer, Socket, WsNamespace } from "../types/types";
 import { createListenerStack } from "./stack.hooks";
 import { wsStorage } from "../store/ws.store.private";
 import { WsStoreKeys } from "../store/ws.store-keys";
@@ -49,6 +52,11 @@ export const createWsService = (mainNamespace: MainNamespace): WsService => {
       this.deployMiddlewares();
       context.on("connection", (socket: Socket) => {
         this.deployListeners(socket);
+        onSocketConnectedEvent.publish(socket);
+
+        context.on("disconnect", () => {
+          onSocketDisconnectedEvent.publish(socket);
+        });
       });
       this.connect(connectOnMount);
       return this;
@@ -66,6 +74,7 @@ export const createWsService = (mainNamespace: MainNamespace): WsService => {
     deployNamespaces(): WsService {
       mainNamespace.namespaces.forEach((namespace) => {
         const ns = this.context!.of(namespace.buildName());
+        namespace.context = ns;
         createEventService(ns, namespace).deploy();
       });
       return this;
@@ -79,7 +88,7 @@ export const createWsService = (mainNamespace: MainNamespace): WsService => {
 };
 
 export const createEventService = (
-  context: WsServer | SocketioNamespace,
+  context: WsServer | WsNamespace,
   storage: ListenerStorage & MiddlewareStorage
 ): WsEventService => {
   return {

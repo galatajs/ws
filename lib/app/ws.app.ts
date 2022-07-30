@@ -7,6 +7,10 @@ import { MiddlewareImplementer } from "../middleware/global.middleware";
 import { MainNamespace } from "../namespace/namespace";
 import { WsServer } from "../types/types";
 import { WebsocketConfigParams } from "../types/config.params";
+import {
+  SocketConnectedListener,
+  SocketDisconnectedListener,
+} from "../events/ws.events";
 
 export interface WsApp
   extends CorePluginCreator,
@@ -16,6 +20,9 @@ export interface WsApp
   mainNamespace: MainNamespace;
   context?: WsServer;
   of: NamespaceCreator;
+  close(): this;
+  onSocketConnect(listener: SocketConnectedListener): this;
+  onSocketDisconnect(listener: SocketDisconnectedListener): this;
 }
 
 export type WsAppCreator = {

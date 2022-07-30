@@ -62,7 +62,7 @@ test("Global Middleware Testing", async (t) => {
   });
 
   await t.test("afterAll", async () => {
-    ws.context.close();
+    ws.close();
     clientSocket.close();
   });
 });

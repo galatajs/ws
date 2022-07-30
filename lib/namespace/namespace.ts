@@ -4,6 +4,7 @@ import {
   MiddlewareImplementer,
   MiddlewareStorage,
 } from "../middleware/global.middleware";
+import { WsNamespace } from "../types/types";
 
 export type NamespaceProps = {
   path: string;
@@ -15,6 +16,7 @@ export interface Namespace
     ListenerCreator,
     ListenerStorage,
     MiddlewareStorage {
+  context?: WsNamespace;
   path: string;
   version?: number;
   buildName(): string;
