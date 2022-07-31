@@ -2,24 +2,24 @@
 # yarn lockfile v1
 
 
-"@istanbul/app@^0.0.14":
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/@istanbul/app/-/app-0.0.14.tgz#01eb0962012ba07b029c8265977b62e5297603fe"
-  integrity sha512-+ruPE9+StonKNvITQTpSlDGASUSPovgcLZYqCudezN9ScHNk4tGfbm/f/r9zMtY4hNJvEiv875wY4Yd7k6kILQ==
+"@istanbul/app@^0.0.20":
+  version "0.0.20"
+  resolved "https://registry.yarnpkg.com/@istanbul/app/-/app-0.0.20.tgz#00501442f7e39be90fc8f66128346f59baffb9fa"
+  integrity sha512-M4CI7rz1f3eJApoPQK2HTDyX9AazHdvz5d0BgNpfCzPQdTLmBXIpXoVr2HYluVxcUeiHJNjJ5v12Oab6a0qc9g==
   dependencies:
     "@istanbul/core" "^0.0.7"
     "@istanbul/events" "^0.0.4"
     "@istanbul/inject" "^0.0.4"
 
-"@istanbul/core@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@istanbul/core/-/core-0.0.6.tgz#230683020eb6c68dd235b61f805d434f92c4a758"
-  integrity sha512-spbPUkTf0V6tnfisMvpTqARiOvU/anSsyYLX1Y0A93lkWnzSr5qq0S/ZaN4tRNyECkvvLVf3GJ+qomHdQNWYeg==
-
 "@istanbul/core@^0.0.7":
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/@istanbul/core/-/core-0.0.7.tgz#298450fa2a636d5815c7a8aba27a86c726b50604"
   integrity sha512-d5moy/XwEhcXjtxgxNM6IrqlbLb5uExU30tDAEPXAZiNyKt6XAfaSCUiMFxp9OKV/LaUNb47uIDZJXmYYbz9Cw==
+
+"@istanbul/core@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@istanbul/core/-/core-0.0.8.tgz#61bbc5954af76205f4258b005ed73aecc291d050"
+  integrity sha512-TT6WIMVh8lECCJYUfwxhMpZO1gs3LOu7YuXzycGgkaL+1EHtgiPuCrvpHY7yMjyk1U30GHH3eVknPnk5uO9C5A==
 
 "@istanbul/events@^0.0.4":
   version "0.0.4"
@@ -31,15 +31,25 @@
   resolved "https://registry.yarnpkg.com/@istanbul/events/-/events-0.0.5.tgz#1bf08d8926d1bbc8dafa0221bb2e54cae270bd4d"
   integrity sha512-2QBgY7twlf6hcltMVSobtCu0OW7UfXiN7rdC0GQXLxOgDW1K8amWcNMsqK8IGRN+/x/SyCrUXtfH0rNa6DkU3Q==
 
-"@istanbul/inject@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@istanbul/inject/-/inject-0.0.2.tgz#0051a39bf09d5a3156bbebb2905aeb48bfbc85db"
-  integrity sha512-3aFKP9SJ8qPteS6KMEzvFDY7O4+hKYYag9udeMHFu4Q2RkT4AglIgIO+lqrxeVo301ejLTLehgXCuj5GxGY3yw==
+"@istanbul/http@^0.0.17":
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/@istanbul/http/-/http-0.0.17.tgz#f1aca97b113d7ffe0b3d30ca2f6b5dd404f3f891"
+  integrity sha512-wJb8aho2hpInzYBdPiSy09AOmZUEPEXaPbI6ktBBm8vFiCDFA2gGdNf4czNdfCtwpCpVytJ3+XdC+LKnf1+dxQ==
+  dependencies:
+    "@istanbul/app" "^0.0.20"
+    "@istanbul/core" "^0.0.8"
+    "@istanbul/events" "^0.0.4"
+    "@istanbul/rules" "^0.0.3"
 
 "@istanbul/inject@^0.0.4":
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/@istanbul/inject/-/inject-0.0.4.tgz#d93280deb30e08861b20e0672e5b3be5d045e0b6"
   integrity sha512-pyRnssamRMoEQedpxXT7jSOIRLPfeeb5S4SFFvCltNMmAWzQIFCnZGCVOLYyisRq+x/WZJw7VSJtli6iMmUFzQ==
+
+"@istanbul/rules@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@istanbul/rules/-/rules-0.0.3.tgz#4e62b418a3e323a9c1b49d6171400d2dc99ec117"
+  integrity sha512-elqrRunsBUYzbcFc32MPyXIE5aEcbdEVDb6dfwryFqh/mXMzSVs6kTdNncwrlb84pMWTPwOVNPDhrgsMJ5oGyg==
 
 "@socket.io/component-emitter@~3.1.0":
   version "3.1.0"

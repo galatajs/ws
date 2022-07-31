@@ -1,5 +1,6 @@
 import { Server as HttpServer } from "node:http";
 import { Server as HTTPSServer } from "node:https";
+import { Http2Server } from "node:http2";
 import {
   Socket as SocketioSocket,
   Server as SocketIoServer,
@@ -52,3 +53,5 @@ export type Getter<T> = {
   get(key: string): T;
 };
 export type Modify<T, R> = Omit<T, keyof R> & R;
+
+export type OnServerStartedEvent = (server: HttpServer | Http2Server) => void;
