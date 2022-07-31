@@ -29,6 +29,10 @@ test("Websocket Module Testing", async (t) => {
     });
   });
 
+  await t.test("client connected testing", () => {
+    assert.strictEqual(client.connected, true);
+  });
+
   await t.test("afterAll", async () => {
     server.close();
     ws.close();
