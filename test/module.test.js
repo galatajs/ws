@@ -1,4 +1,5 @@
 "use-strict";
+const assert = require("node:assert");
 const test = require("node:test");
 const { createApp } = require("@istanbul/app");
 const { createHttpServer } = require("@istanbul/http");
