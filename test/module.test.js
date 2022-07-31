@@ -1,4 +1,5 @@
 "use-strict";
+const assert = require("node:assert");
 const test = require("node:test");
 const { createApp } = require("@istanbul/app");
 const { createHttpServer } = require("@istanbul/http");
@@ -27,6 +28,10 @@ test("Websocket Module Testing", async (t) => {
       });
       app.start();
     });
+  });
+
+  await t.test("client connected testing", () => {
+    assert.strictEqual(client.connected, true);
   });
 
   await t.test("afterAll", async () => {
