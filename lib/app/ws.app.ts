@@ -1,5 +1,5 @@
 import { CorePluginCreator } from "@istanbul/app";
-import { HttpServerForWs } from "../types/types";
+import { HttpServerForWs, OnServerStartedEvent } from "../types/types";
 import { NamespaceCreator } from "../namespace/namespace";
 import { WebsocketConfig } from "../config/config";
 import { ListenerCreator } from "../listener/listener";
@@ -23,6 +23,7 @@ export interface WsApp
   close(): this;
   onSocketConnect(listener: SocketConnectedListener): this;
   onSocketDisconnect(listener: SocketDisconnectedListener): this;
+  bindHttpServer(): OnServerStartedEvent;
 }
 
 export type WsAppCreator = {
