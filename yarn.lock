@@ -11,6 +11,15 @@
     "@istanbul/events" "^0.0.4"
     "@istanbul/inject" "^0.0.4"
 
+"@istanbul/app@^0.0.27":
+  version "0.0.27"
+  resolved "https://registry.yarnpkg.com/@istanbul/app/-/app-0.0.27.tgz#fa0d43add257ca269f4876f6da0ec6b9f374edc1"
+  integrity sha512-6YI0vGS4erF/IHej+1YZYRF3bPBsqeCkhQJw0WitOeLLtowMVVnVNuT+h0cC4skO5lDzJekj54UPft+U4C4l1Q==
+  dependencies:
+    "@istanbul/core" "^0.0.7"
+    "@istanbul/events" "^0.0.4"
+    "@istanbul/inject" "^0.0.4"
+
 "@istanbul/core@^0.0.7":
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/@istanbul/core/-/core-0.0.7.tgz#298450fa2a636d5815c7a8aba27a86c726b50604"

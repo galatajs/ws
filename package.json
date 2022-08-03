@@ -1,6 +1,6 @@
 {
   "name": "@istanbul/ws",
-  "version": "0.0.16",
+  "version": "0.0.19",
   "description": "Websocket packages of istanbul framework",
   "homepage": "https://github.com/istanbulnode/ws#readme",
   "keywords": [
@@ -35,7 +35,7 @@
     "production": "npm run build && npm run test"
   },
   "dependencies": {
-    "@istanbul/app": "^0.0.20",
+    "@istanbul/app": "^0.0.27",
     "@istanbul/core": "^0.0.8",
     "@istanbul/events": "^0.0.5",
     "@istanbul/inject": "^0.0.4",
