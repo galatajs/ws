@@ -111,14 +111,7 @@ export const createWsApp: WsAppCreator = (
             this.context.adapter(this.config.adapter);
           }
           if (corsMiddleware) {
-            this.context.engine.corsMiddleware = (
-              options: any,
-              req: IncomingMessage,
-              res: ServerResponse,
-              next: Function
-            ) => {
-              return corsMiddleware(req, res, next);
-            };
+            this.context.engine.corsMiddleware = corsMiddleware;
           }
           publicWsStore.provide(PublicWsStoreKeys.context, this.context);
           createWsService(this.mainNamespace).mount(
