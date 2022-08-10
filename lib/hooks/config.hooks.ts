@@ -22,6 +22,7 @@ const defaultConfig: WebsocketConfig = {
       HttpMethods.HEAD,
     ],
   },
+  parser: undefined,
 };
 
 export const createConfig = (

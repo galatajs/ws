@@ -43,6 +43,7 @@ export interface WebsocketConfig {
   versionSeparator: string;
 
   cors: any;
+  parser: any;
 
   /**
    * @default undefined

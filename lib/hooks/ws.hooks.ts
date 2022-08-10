@@ -106,6 +106,7 @@ export const createWsApp: WsAppCreator = (
             serveClient: this.config.serveClient,
             connectTimeout: this.config.connectTimeout,
             cors: !!corsMiddleware ? null : this.config.cors,
+            parser: this.config.parser,
           });
           if (this.config.adapter) {
             this.context.adapter(this.config.adapter);
