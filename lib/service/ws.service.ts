@@ -1,8 +1,10 @@
+import { GlobalMiddleware } from "../middleware/global.middleware";
 import { MainNamespace } from "../namespace/namespace";
 import { Socket, WsServer } from "../types/types";
 
 export interface WsService {
   context?: WsServer;
+  listening: boolean;
   mainNamespace?: MainNamespace;
   mount(
     context: WsServer,
@@ -13,6 +15,7 @@ export interface WsService {
   deployListeners(socket: Socket): this;
   deployMiddlewares(): this;
   deployNamespaces(): this;
+  addDynamicMiddleware(middleware: GlobalMiddleware): this;
 }
 
 export interface WsEventService {

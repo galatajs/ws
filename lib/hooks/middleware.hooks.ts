@@ -3,6 +3,7 @@ import {
   GlobalMiddleware,
   MiddlewareImplementer,
 } from "../middleware/global.middleware";
+import { WsService } from "../service/ws.service";
 import { NextFunction, Socket } from "../types/types";
 
 const wrapGlobalMiddleware = (
@@ -18,11 +19,28 @@ const wrapGlobalMiddleware = (
 };
 
 export const createMiddlewareImplementer = (
-  middlewares: UniqueSet<GlobalMiddleware>
+  middlewares: UniqueSet<GlobalMiddleware>,
+  wsService?: WsService
 ): MiddlewareImplementer => {
   return {
     use(middleware: GlobalMiddleware) {
-      middlewares.add(wrapGlobalMiddleware(middleware));
+      if (!!wsService) {
+        useMiddlewareWithService(wsService, middlewares, middleware);
+      } else {
+        middlewares.add(wrapGlobalMiddleware(middleware));
+      }
     },
   };
+};
+
+const useMiddlewareWithService = (
+  wsService: WsService,
+  middlewares: UniqueSet<GlobalMiddleware>,
+  middleware: GlobalMiddleware
+) => {
+  if (wsService.listening) {
+    wsService.addDynamicMiddleware(wrapGlobalMiddleware(middleware));
+  } else {
+    middlewares.add(wrapGlobalMiddleware(middleware));
+  }
 };

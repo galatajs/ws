@@ -25,6 +25,7 @@ import {
   SocketConnectedListener,
   SocketDisconnectedListener,
 } from "../events/ws.events";
+import { WsService } from "../service/ws.service";
 
 export const createWsApp: WsAppCreator = (
   httpServer?:
@@ -40,12 +41,13 @@ export const createWsApp: WsAppCreator = (
   const showServerNotStartedWarn = () => {
     warn(`Websocket - Server is not started`);
   };
+  const wsService: WsService = createWsService(mainNamespace);
   let waitIstanbulHttp: boolean = false;
   return {
     config: config,
     context: undefined,
     mainNamespace: mainNamespace,
-    ...createMiddlewareImplementer(mainNamespace.middlewares),
+    ...createMiddlewareImplementer(mainNamespace.middlewares, wsService),
     ...createListenerCreator(mainNamespace.listeners),
     of: createNamespace,
     close() {
@@ -115,11 +117,7 @@ export const createWsApp: WsAppCreator = (
             this.context.engine.corsMiddleware = corsMiddleware;
           }
           publicWsStore.provide(PublicWsStoreKeys.context, this.context);
-          createWsService(this.mainNamespace).mount(
-            this.context,
-            this.mainNamespace,
-            !!!httpServer
-          );
+          wsService.mount(this.context, this.mainNamespace, !!!httpServer);
         },
       };
     },

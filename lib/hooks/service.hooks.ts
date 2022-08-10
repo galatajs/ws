@@ -4,7 +4,10 @@ import {
 } from "../events/ws.events";
 import { ListenerStorage } from "../listener/listener";
 import { MainNamespace } from "../namespace/namespace";
-import { MiddlewareStorage } from "../middleware/global.middleware";
+import {
+  GlobalMiddleware,
+  MiddlewareStorage,
+} from "../middleware/global.middleware";
 import { WsEventService, WsService } from "../service/ws.service";
 import { WsServer, Socket, WsNamespace } from "../types/types";
 import { createListenerStack } from "./stack.hooks";
@@ -39,6 +42,7 @@ const deployListenersWithStorage = (
 
 export const createWsService = (mainNamespace: MainNamespace): WsService => {
   return {
+    listening: false,
     context: undefined,
     mainNamespace: undefined,
     mount(
@@ -82,6 +86,11 @@ export const createWsService = (mainNamespace: MainNamespace): WsService => {
     connect(connectOnMount: boolean): WsService {
       const config = wsStorage.inject(WsStoreKeys.Config) as WebsocketConfig;
       if (connectOnMount) this.context!.listen(config.port);
+      this.listening = true;
+      return this;
+    },
+    addDynamicMiddleware(middleware: GlobalMiddleware): WsService {
+      this.context?.use(middleware);
       return this;
     },
   };
