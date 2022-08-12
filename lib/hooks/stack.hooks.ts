@@ -32,10 +32,10 @@ export const createListenerStack = (
   req.body = { body };
   const stack = new Set<InternalMiddleware>(props.listener.middlewares);
   const done = (result?: any) => {
-    res.reply(result);
+    res.reply(checkAndParse(result));
   };
   const next = async (err?: any) => {
-    if (err) return next(checkAndParse(err));
+    if (err) return done(err);
     const { value: middleware, done: isDone } = stack.values().next();
     try {
       if (isDone && !middleware)
