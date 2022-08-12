@@ -35,7 +35,7 @@ export const createListenerStack = (
     res.reply(result);
   };
   const next = async (err?: any) => {
-    if (err) return checkAndParse(err);
+    if (err) return next(checkAndParse(err));
     const { value: middleware, done: isDone } = stack.values().next();
     try {
       if (isDone && !middleware)
