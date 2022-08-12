@@ -5,6 +5,14 @@ import { WsStoreKeys } from "../store/ws.store-keys";
 import { wsStorage } from "../store/ws.store.private";
 import { ErrorEventHandler } from "../types/types";
 import { createResponseInstance } from "./response.hooks";
+import { BadRequestError, IError } from "@istanbul/core";
+
+const checkAndParse = (data: any): any => {
+  if (data instanceof IError) return data.serialize();
+  if (data instanceof Error)
+    return new BadRequestError(data.message).serialize();
+  return data;
+};
 
 export const createListenerStack = (
   props: CreateListenerStackProps
@@ -27,7 +35,7 @@ export const createListenerStack = (
     res.reply(result);
   };
   const next = async (err?: any) => {
-    if (err) return done(err);
+    if (err) return checkAndParse(err);
     const { value: middleware, done: isDone } = stack.values().next();
     try {
       if (isDone && !middleware)
