@@ -26,12 +26,12 @@ export const createListenerStack = (
   const done = (result?: any) => {
     res.reply(result);
   };
-  const next = (err?: any) => {
+  const next = async (err?: any) => {
     if (err) return done(err);
     const { value: middleware, done: isDone } = stack.values().next();
     try {
       if (isDone && !middleware)
-        return props.listener.handler(props.socket, req, res);
+        return await props.listener.handler(props.socket, req, res);
       stack.delete(middleware);
       middleware(props.socket, req, res, next);
     } catch (e) {
