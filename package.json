@@ -43,7 +43,7 @@
     "socket.io": "^4.5.1"
   },
   "devDependencies": {
-    "@istanbul/http": "^0.0.17",
+    "@istanbul/http": "^0.0.24",
     "@types/jest": "^29.2.0",
     "@types/node": "^18.0.0",
     "jest": "^29.2.2",
