@@ -29,7 +29,7 @@ export const createListenerStack = (
       ? props.args
       : {};
   const req = transformHttpRequest(props.socket.request);
-  req.body = { body };
+  req.body = body;
   const stack = new Set<InternalMiddleware>(props.listener.middlewares);
   const done = (result?: any) => {
     res.reply(checkAndParse(result));
