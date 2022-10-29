@@ -35,8 +35,12 @@ test("Internal Middleware Testing", async (t) => {
     ws.listen("test", [middleware], (socket, req, res) => {
       res.reply(new Date().getTime() - time);
     });
-    clientSocket.emit("test", (date) => {
-      assert.strictEqual(date > 1000, true);
+
+    return new Promise((resolve, reject) => {
+      clientSocket.emit("test", (date) => {
+        assert.strictEqual(date > 1000, true);
+        resolve();
+      });
     });
   });
 
