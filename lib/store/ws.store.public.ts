@@ -1,7 +1,7 @@
-import { createInjector } from "@istanbul/inject";
+import { createInjector } from "@galatajs/inject";
 
 export enum WsStoreKeys {
-  context = "istanbul/context",
+  context = "galatajs/context",
 }
 
 export const wsStore = createInjector();

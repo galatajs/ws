@@ -1,4 +1,4 @@
-import { UniqueSet } from "@istanbul/core";
+import { UniqueSet } from "@galatajs/core";
 import { NextFunction, Socket } from "../types/types";
 
 export type GlobalMiddleware = (socket: Socket, next: NextFunction) => any;

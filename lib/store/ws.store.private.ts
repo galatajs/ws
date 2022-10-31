@@ -1,3 +1,3 @@
-import { createInjector } from "@istanbul/inject";
+import { createInjector } from "@galatajs/inject";
 
 export const wsStorage = createInjector();

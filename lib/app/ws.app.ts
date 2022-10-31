@@ -1,4 +1,4 @@
-import { CorePluginCreator } from "@istanbul/app";
+import { CorePluginCreator } from "@galatajs/app";
 import { HttpServerForWs, OnServerStartedEvent } from "../types/types";
 import { NamespaceCreator } from "../namespace/namespace";
 import { WebsocketConfig } from "../config/config";

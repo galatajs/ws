@@ -1,8 +1,8 @@
 "use-strict";
 const assert = require("node:assert");
 const test = require("node:test");
-const { createApp } = require("@istanbul/app");
-const { createHttpServer } = require("@istanbul/http");
+const { createApp } = require("@galatajs/app");
+const { createHttpServer } = require("@galatajs/http");
 const { io: Client } = require("socket.io-client");
 const { createWsApp } = require("../dist");
 

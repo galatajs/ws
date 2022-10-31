@@ -1,5 +1,5 @@
 import { NamespaceCreator, NamespaceImplementer } from "../namespace/namespace";
-import { UniqueSet } from "@istanbul/core";
+import { UniqueSet } from "@galatajs/core";
 import { WebsocketConfig } from "../config/config";
 import { Listener } from "../listener/listener";
 import { GlobalMiddleware } from "../middleware/global.middleware";

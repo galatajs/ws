@@ -1,4 +1,4 @@
-import { UniqueSet } from "@istanbul/core";
+import { UniqueSet } from "@galatajs/core";
 import { InternalMiddleware } from "../middleware/internal.middleware";
 import { EventHandler } from "../types/types";
 

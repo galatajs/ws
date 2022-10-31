@@ -1,5 +1,5 @@
 import { WsServer, Socket } from "../types/types";
-import { createEvent } from "@istanbul/events";
+import { createEvent } from "@galatajs/events";
 
 export type SocketConnectedListener = (socket: Socket) => void | Promise<void>;
 export type SocketDisconnectedListener = (

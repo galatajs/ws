@@ -1,6 +1,6 @@
 import { InternalMiddleware } from "../middleware/internal.middleware";
 import { EventHandler } from "../types/types";
-import { UniqueSet } from "@istanbul/core";
+import { UniqueSet } from "@galatajs/core";
 import {
   CreateListenerProps,
   Listener,

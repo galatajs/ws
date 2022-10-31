@@ -4,7 +4,7 @@ import {
   Status,
   SuccessDataResult,
   SuccessResult,
-} from "@istanbul/core";
+} from "@galatajs/core";
 import { Response } from "../response/response";
 
 export const createResponseInstance = (callback?: Function): Response => {

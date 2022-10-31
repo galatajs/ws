@@ -1,4 +1,4 @@
-import { UniqueSet } from "@istanbul/core";
+import { UniqueSet } from "@galatajs/core";
 import { ListenerCreator, ListenerStorage } from "../listener/listener";
 import {
   MiddlewareImplementer,

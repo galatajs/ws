@@ -2,7 +2,7 @@
 const { createServer } = require("node:http");
 const assert = require("node:assert");
 const test = require("node:test");
-const { createApp } = require("@istanbul/app");
+const { createApp } = require("@galatajs/app");
 const { io: Client } = require("socket.io-client");
 const { createWsApp } = require("../dist");
 

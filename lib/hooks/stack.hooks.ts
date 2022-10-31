@@ -5,7 +5,7 @@ import { WsStoreKeys } from "../store/ws.store-keys";
 import { wsStorage } from "../store/ws.store.private";
 import { ErrorEventHandler } from "../types/types";
 import { createResponseInstance } from "./response.hooks";
-import { BadRequestError, IError } from "@istanbul/core";
+import { BadRequestError, IError } from "@galatajs/core";
 
 const checkAndParse = (data: any): any => {
   if (data instanceof IError) return data.serialize();

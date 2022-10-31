@@ -1,5 +1,4 @@
-import { IncomingMessage, ServerResponse } from "node:http";
-import { App, CorePlugin, warn } from "@istanbul/app";
+import { App, CorePlugin, warn } from "@galatajs/app";
 import { Server } from "socket.io";
 import {
   isWebsocketParams,
@@ -42,7 +41,7 @@ export const createWsApp: WsAppCreator = (
     warn(`Websocket - Server is not started`);
   };
   const wsService: WsService = createWsService(mainNamespace);
-  let waitIstanbulHttp: boolean = false;
+  let waitGalatajsHttp: boolean = false;
   return {
     config: config,
     context: undefined,
@@ -64,7 +63,7 @@ export const createWsApp: WsAppCreator = (
       return this;
     },
     bindHttpServer(): OnServerStartedEvent {
-      waitIstanbulHttp = true;
+      waitGalatajsHttp = true;
       return (server) => {};
     },
     build(): CorePlugin {
@@ -97,10 +96,10 @@ export const createWsApp: WsAppCreator = (
             this.config.errorHandler
           );
           const corsMiddleware = app.store.inject(
-            "istanbuljs:cors-ws-middleware",
+            "galatajs:cors-ws-middleware",
             true
           );
-          httpServer = waitIstanbulHttp
+          httpServer = waitGalatajsHttp
             ? await getHttpInstance(corePlugins)
             : httpServer;
           this.context = new Server(httpServer, {

@@ -1,11 +1,10 @@
 {
-  "name": "@istanbul/ws",
-  "version": "0.0.29",
-  "description": "Websocket packages of istanbul framework",
-  "homepage": "https://github.com/istanbulnode/ws#readme",
+  "name": "@galatajs/ws",
+  "version": "0.1.1",
+  "description": "Websocket packages of galatajs framework",
+  "homepage": "https://github.com/galatajs/ws#readme",
   "keywords": [
     "typescript",
-    "istanbul",
     "websocket",
     "versioned",
     "middleware-based"
@@ -14,10 +13,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/istanbulnode/ws.git"
+    "url": "git+https://github.com/galatajs/ws.git"
   },
   "bugs": {
-    "url": "https://github.com/istanbulnode/ws/issues"
+    "url": "https://github.com/galatajs/ws/issues"
   },
   "directories": {
     "lib": "lib",
@@ -35,14 +34,14 @@
     "production": "npm run build && npm run test"
   },
   "dependencies": {
-    "@istanbul/app": "^0.0.33",
-    "@istanbul/core": "^0.0.8",
-    "@istanbul/events": "^0.0.5",
-    "@istanbul/inject": "^0.0.4",
+    "@galatajs/app": "^0.1.1",
+    "@galatajs/core": "^0.1.1",
+    "@galatajs/events": "^0.1.1",
+    "@galatajs/inject": "^0.1.1",
     "socket.io": "^4.5.1"
   },
   "devDependencies": {
-    "@istanbul/http": "^0.0.17",
+    "@galatajs/http": "^0.1.1",
     "@types/node": "^18.0.0",
     "socket.io-adapter": "^2.4.0",
     "socket.io-client": "^4.5.1",
